@@ -463,7 +463,7 @@ While loop is used to execute a set of statements as long as a condition is true
 ### Conditions
  - evaluate to true or false
  - are used most commonly in "if statements" and "loops"
-  ```bash
+```bash
 calculation_to_units = 24 * 60 * 60
 name_of_unit = "seconds"
 
@@ -496,5 +496,108 @@ validate_and_execute()
 ```
 
 # Lists & For Loop
+
+Lists - To Store multiple items in a single variable.  
+A list can contain different data types.  
+
+For Loop - It is used for iterating over a sequence (like a list)  
+So we can execute smth for each item in a list.
+
+```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+     return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+
+
+def validate_and_execute():
+    try:
+       user_inputnum = int(num_of_days_element)
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+       else:
+           print("you entered a negative number, so no conversion happens for you!")
+    except ValueError:
+        print ("your input is not a number. Don't ruin my program")
+
+user_input = ""
+while user_input != "exit":                           --> As long as the user inputs something different than "exit"
+   user_input = input("Hey user, enter a number of days as a comma separated list and i will convert it to hours!\n")      |  --> this continues looping until we type exit
+   print(type(user_input.split(",")))
+   print (user_input.split(","))
+   for num_of_days_element in user_input.split(","):
+      validate_and_execute()
+```
+## Basic List Operations
+- Create a list
+- Access items of the list
+- Add an item to the list
+- Remove an item from the list
+- Changes items in the list
+
+```bash
+lists.py
+
+my_list = ["January", "Frebruary", "March"]
+print(my_list[0])         --> access an items of the list
+my_list.append("April")   -->Adds an item to the list
+print(my_list)
+my_list.remove("January")
+print(my_list)
+```
+# Comments
+U can comment the workflow expalanation using # in python file.
+If you don't want a set of code in python file just keep # at the line beginning.
+
+# Sets
+```bash
+user_input = ""
+while user_input != "exit":                           --> As long as the user inputs something different than "exit"
+   user_input = input("Hey user, enter a number of days as a comma separated list and i will convert it to hours!\n")      |  --> this continues looping until we type exit
+   list_of_days = user_input.split(",")
+   print(list_of_days)
+   print(set(list_of_days))
+   print(type(set(list_of_days)))
+   
+   for num_of_days_element in set(list_of_days):
+      validate_and_execute()
+```
+
+## Basic Set Operations & Syntax
+- Create a set
+- Access items only via loop
+- Add an item to the set
+- Remove an item from the set
+-  Unordered and Unchangeable
+   - Items in a set do not have a defined order!
+   - Items cannot be referred to by index!
+   - Items cannot be changed, only added/removed!
+
+```bash
+sets.py
+
+my_set = {"January", "February", "march"}
+for element in my_set:
+    print(element)
+my_set.add("April")
+print(my_set)
+my_set.remove("January")
+print(my_set)
+```
+
+## Built-in-Functions
+#### Standalone Built-In-Functions
+
+print() - Prints to the Standard output device
+input() - Asks user  for input
+set() - Returns a new set
+int() - Converts Value into an integer number
+
+
+
 
 
