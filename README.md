@@ -277,4 +277,224 @@ print (calculated_value)
 ```
 
 ## Conditionals (if/else) & Boolean Data Type
-  
+
+Conditionals - Expressions that evaluate to either true or false.
+
+##### **Python Comparision Operators**
+
+Comparision operators are used to compare two values: 
+
+| Operator | Name | Example|
+|-----------|---------|---------|
+| == | Equals | a == b |
+| != | Not Equals | a != b |
+| < | Less than | a < b |
+| <= | Less than or equal to | a <= b |
+| > | Greater than | a > b |
+| >= | Greater than or equal to | a >= b |
+
+##### **Python Arithmetic Operators**
+
+Arithmetic Operators are used with numeric values to perform common mathematical Operations:
+
+| Operator | Name | Example |
+|------------|--------|-----|
+| + | Addition | x+y |
+| - | Subtraction | x-y |
+| * | Multiplication | x*y |
+| / | Division | x/y |
+| % | Modulus | x%y |
+| ** | Exponentation | x**y |
+| // | Floor division | x//y |
+
+```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+    if num_of_days > 0:
+       return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+    else:
+       return "You entered a negative value, so no conversion for you|"
+
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")   ##\n will moves the cursor to next line in cmd
+user_integervalue = int(user_input)
+calculated_value = days_to_units(user_integervalue)
+print (calculated_value)
+```
+
+ # Boolean Data Type
+ - Boolean can only have 2 Values: True or False
+ ```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+    #print(num_of_days > 0)          # It prints either this condition is true or false
+    condition_check = num_of_days > 0
+    print(type(condition_check))              # Type is a key word which prints the class type
+    if num_of_days > 0:
+       return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+    elif num_of_days == 0:
+       return "you entered a 0, please enter a valid number"
+    else:
+       return "You entered a negative value, so no conversion for you|"
+
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")   ##\n will moves the cursor to next line in cmd
+calculated_value = days_to_units(int(user_input))                       ##  Return Value of inner function is the input value for the outer function.
+print (calculated_value)
+
+```
+
+## More User Input Validation:
+If user enters text instead of number, our program will be crashed to protect program from it.
+
+ ```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+    #print(num_of_days > 0)          # It prints either this condition is true or false
+    condition_check = num_of_days > 0
+    print(type(condition_check))              # Type is a key word which prints the class type
+    if num_of_days > 0:
+       return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+    elif num_of_days == 0:
+       return "you entered a 0, please enter a valid number"
+    else:
+       return "You entered a negative value, so no conversion for you|"
+
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")
+if user_input.isdigit():   
+  calculated_value = days_to_units(int(user_input))                       
+  print (calculated_value)
+else:
+    print ("your input is not a number. Don't ruin my program")
+```
+
+## Clean up our code
+
+ ```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+    #print(num_of_days > 0)          # It prints either this condition is true or false
+    condition_check = num_of_days > 0
+    print(type(condition_check))              # Type is a key word which prints the class type
+    if num_of_days > 0:
+       return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+    elif num_of_days == 0:
+       return "you entered a 0, please enter a valid number"
+    else:
+       return "You entered a negative value, so no conversion for you|"
+
+def validate_and_execute():
+    if user_input.isdigit():   
+       calculated_value = days_to_units(int(user_input))                       
+       print (calculated_value)
+    else:
+        print ("your input is not a number. Don't ruin my program") 
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")
+
+```
+## Nested - If else
+
+```
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+     return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+
+
+def validate_and_execute():
+    if user_input.isdigit():
+       user_inputnum = int(user_input)
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+    else:
+        print ("your input is not a number. Don't ruin my program") 
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")
+validate_and_execute()
+
+```
+
+## Error Handling with try/except
+
+Try/Except
+- The try block: let's you "test" a block of code for errors
+- The Except block: catches the error and lets you handle it
+```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+     return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+
+
+def validate_and_execute():
+    try:
+       user_inputnum = int(user_input)
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+       else:
+           print("you entered a negative number, so no conversion happens for you!")
+    except ValueError:
+        print ("your input is not a number. Don't ruin my program") 
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")
+validate_and_execute()
+
+```
+
+## While loops
+
+While loop is used to execute a set of statements as long as a condition is true
+
+### Looping 
+ - To execute logic multiple types
+ - Python has 2 loop commands
+### Conditions
+ - evaluate to true or false
+ - are used most commonly in "if statements" and "loops"
+  ```bash
+calculation_to_units = 24 * 60 * 60
+name_of_unit = "seconds"
+
+def days_to_units(num_of_days):
+     return f"{num_of_days} days are {num_of_days * calculation_to_units}{name_of_units}"
+
+
+def validate_and_execute():
+    try:
+       user_inputnum = int(user_input)
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+       else:
+           print("you entered a negative number, so no conversion happens for you!")
+    except ValueError:
+        print ("your input is not a number. Don't ruin my program")
+while True:                                                                                   |
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")      |  --> this continues looping until we manually stop it
+validate_and_execute()
+
+user_input = ""
+while user_input != "exit":                           --> As long as the user inputs something different than "exit"
+user_input = input("Hey user, enter a number of days and i will convert it to hours!\n")      |  --> this continues looping until we type exit
+validate_and_execute()
+
+
+```
+
+# Lists & For Loop
+
+
