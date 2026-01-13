@@ -592,10 +592,319 @@ print(my_set)
 ## Built-in-Functions
 #### Standalone Built-In-Functions
 
-print() - Prints to the Standard output device
-input() - Asks user  for input
-set() - Returns a new set
-int() - Converts Value into an integer number
+print() - Prints to the Standard output device.  
+input() - Asks user  for input.  
+set() - Returns a new set.  
+int() - Converts Value into an integer number..
+
+## Dictionary data type
+
+Dictionary are used to store values in key:value pairs.  
+Is a collection, which does not allow duplicate values.
+
+## Accessing items in a list
+- Items can be accessed by index
+- The first item has index 0 ["20","hours"]
+- index 0 = 20, index 1 = hours
+
+## Accessing items in a dictionary
+- Items can be accessed by it's key name.
+- you can use square brackets or get() method
+  your_dict["days"] or your_dict.get("days")
+
+
+
+syntax:
+my_dictionary = {
+    "days": 20,
+    "unit": "hours",
+}
+
+```bash
+def days_to_units(num_of_days, conversion_unit):
+    if conversion_unit == "hours":
+       return f"{num_of_days} days are {num_of_days * 24} hours"
+    elif conversion_unit == "minutes":
+       return f"{num_of_days} days are {num_of_days * 24 * 60} minutes"
+    else:
+       return "unsupported unit"
+
+
+def validate_and_execute():
+    try:
+       user_inputnum = int(days_and_unit_dictionary["days"])
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+       else:
+           print("you entered a negative number, so no conversion happens for you!")
+    except ValueError:
+        print ("your input is not a number. Don't ruin my program")
+
+user_input = ""
+while user_input != "exit":                           --> As long as the user inputs something different than "exit"
+   user_input = input("Hey user, enter a number of days as a comma separated list and i will convert it to hours!\n")      |  --> this continues looping until we type exit
+   days_and_unit = user_input.split(":")
+   print(days_and_unit)
+   days_and_unit_dictionary = {"days": days_and_unit[0], "unit": days_and_unit[1]}
+   print (days_and_unit_dictionary)
+print(type(days_and_unit_dictionary))
+   validate_and_execute()
+```
+## Modules
+- Module is just a python file that contains functions or variables that can be used in another python file.
+- It is used to Logically organize your python code
+- Module should contain realted code
+
+  ## Create a module & import statement.
+
+```bash
+
+## main.py
+
+import helper ## To Import entire helper module and you should specify helper. before a function
+from helper import validate_and_execute, user_input_message     ## To import a specific function from a module and importing a user_input_message variable
+from helper import * --> It is also to import entire helper module, in this case you don't need to mention helper. before a function
+
+
+user_input = ""
+while user_input != "exit":                           --> As long as the user inputs something different than "exit"
+   user_input = input(user_input_message)      |  --> this continues looping until we type exit
+   days_and_unit = user_input.split(":")
+   print(days_and_unit)
+   days_and_unit_dictionary = {"days": days_and_unit[0], "unit": days_and_unit[1]}
+   print (days_and_unit_dictionary)
+   print(type(days_and_unit_dictionary))
+   helper.validate_and_execute(days_and_unit_dictionary)
+
+
+
+## helper.py
+
+def days_to_units(num_of_days, conversion_unit):
+    if conversion_unit == "hours":
+       return f"{num_of_days} days are {num_of_days * 24} hours"
+    elif conversion_unit == "minutes":
+       return f"{num_of_days} days are {num_of_days * 24 * 60} minutes"
+    else:
+       return "unsupported unit"
+
+
+def validate_and_execute(days_and_unit_dictionary):
+    try:
+       user_inputnum = int(days_and_unit_dictionary["days"])
+       if user_inputnum > 0:   
+          calculated_value = days_to_units(user_inputnum)                       
+          print (calculated_value)
+       elif user_inputnum == 0:
+           print("you entered a 0, please enter a valid number")
+       else:
+           print("you entered a negative number, so no conversion happens for you!")
+    except ValueError:
+        print ("your input is not a number. Don't ruin my program")
+
+user_input_message = "Hey user, enter a number of days as a comma separated list and i will convert it to hours!\n"   --> this is a variable
+```
+
+# Project
+
+## Project exercise
+
+a) Accept user input of goal and a deadline
+b) print back:
+   How much time remains until that deadline?
+
+We make use of datetime module for the time calculation.
+
+
+```bash
+
+## time-till-deadline.py
+
+import datetime
+
+user_input = input ("enter your goal with a deadline seperated by a colon \n")
+input_list = user_input.split(":")
+
+goal = input_list[0]
+deadline = input_list[1]
+
+deadline_date = datetime.strptime(deadline, "%d,%m,%Y")
+today_date = datetime.today()
+time_till = deadline_date - today_date
+
+hours_till = int(time_till.total_seconds() /60 /60)
+print(f"Dear user! Time remaining for your goal: {goal} is {hours_till} hours")
+
+```
+
+# Project - Work with spread sheets
+
+Ex: 
+| product | Inventory | price | Supplier |
+| 1 | 20 | 200,4 | AAA Company |
+| 2 | 23 | 33 | BBB Company |
+| 3 | 3000 | 23499 | CCC Company |
+
+
+Excercises:
+
+1) List each company with respective product count.  
+2) List products with inventory less than 10.  
+3) List each company with respective total inventory value.  
+4) Write to spread sheet : Calculate and write inventory value for each product into spread sheet.
+
+## Different ways to work with files
+
+- Python has several built-in- functions for handling files in general
+   - io module --> create, read, write
+- Python package to work with spreadsheets specifically
+   - more practical functions for spreadsheets specifically
+   - easier to use
+```bash
+
+$: pip install openpyxl
+
+# main.py
+
+# implementation
+import openpyxl
+
+invfile = openpyxl.load_workbook("inventory.xlsx")
+product_list = inv_file["sheet1"]
+
+# Excercise 1:
+
+products_per_supplier = {}
+
+for product_row in range(2, product_list.max_row + 1):
+    supplier_name = product_list.cell(product_row, 4).value
+
+# Calculation num of products per supplier
+    if supplier_name in products_per_supplier:
+       current_num_products = products_per_supplier[supplier_name]
+       products_per_supplier[supplier_name] = current_num_products + 1
+    else:
+       print("adding a new supplier")
+       products_per_supplier[supplier_name] = 1
+print(products_per_supplier)
+
+# Exercise 2: Calculation total value of inventory per supplier
+
+products_per_supplier = {}
+total_value_per_supplier = {}
+
+for product_row in range(2, product_list.max_row + 1):
+    supplier_name = product_list.cell(product_row, 4).value
+    inventory = product_list.cell(product_row, 2).value
+    price = product_list.cell(product_row, 3).value
+
+# Calculation num of products per supplier
+    if supplier_name in products_per_supplier:
+       current_num_products = products_per_supplier[supplier_name]
+       products_per_supplier[supplier_name] = current_num_products + 1
+    else:
+       print("adding a new supplier")
+       products_per_supplier[supplier_name] = 1
+print(products_per_supplier)
+
+# Calculation total value of inventory per supplier
+if supplier_name in total_value_per_supplier:
+   current_total_value = total_value_per_supplier.get(supplier_name)
+   total_value_per_supplier[supplier_name] = current_total_value + inventory * price
+else:
+   total_value_per_supplier[supplier_name] = inventory * price
+print(products_per_supplier)
+print(total_value_per_supplier)
+
+# Exercise 3:
+
+products_per_supplier = {}
+total_value_per_supplier = {}
+products_under_10_inv = {}
+
+for product_row in range(2, product_list.max_row + 1):
+    supplier_name = product_list.cell(product_row, 4).value
+    inventory = product_list.cell(product_row, 2).value
+    price = product_list.cell(product_row, 3).value
+    product_num = product_list.cell(product_row, 1).value
+
+# Calculation num of products per supplier
+    if supplier_name in products_per_supplier:
+       current_num_products = products_per_supplier[supplier_name]
+       products_per_supplier[supplier_name] = current_num_products + 1
+    else:
+       print("adding a new supplier")
+       products_per_supplier[supplier_name] = 1
+print(products_per_supplier)
+
+# Calculation total value of inventory per supplier
+if supplier_name in total_value_per_supplier:
+   current_total_value = total_value_per_supplier.get(supplier_name)
+   total_value_per_supplier[supplier_name] = current_total_value + inventory * price
+else:
+   total_value_per_supplier[supplier_name] = inventory * price
+print(products_per_supplier)
+print(total_value_per_supplier)
+
+#Logic products with inventory less than 10
+if inventory < 10:
+   product_under_10_inv[product_num] = inventory
+
+print (product_under_10_inv)
+
+# Execise 4:
+
+products_per_supplier = {}
+total_value_per_supplier = {}
+products_under_10_inv = {}
+
+for product_row in range(2, product_list.max_row + 1):
+    supplier_name = product_list.cell(product_row, 4).value
+    inventory = product_list.cell(product_row, 2).value
+    price = product_list.cell(product_row, 3).value
+    product_num = product_list.cell(product_row, 1).value
+    inventory_price = product_list.cell(product_row, 5)
+
+# Calculation num of products per supplier
+    if supplier_name in products_per_supplier:
+       current_num_products = products_per_supplier[supplier_name]
+       products_per_supplier[supplier_name] = current_num_products + 1
+    else:
+       print("adding a new supplier")
+       products_per_supplier[supplier_name] = 1
+print(products_per_supplier)
+
+# Calculation total value of inventory per supplier
+if supplier_name in total_value_per_supplier:
+   current_total_value = total_value_per_supplier.get(supplier_name)
+   total_value_per_supplier[supplier_name] = current_total_value + inventory * price
+else:
+   total_value_per_supplier[supplier_name] = inventory * price
+print(products_per_supplier)
+print(total_value_per_supplier)
+
+#Logic products with inventory less than 10
+if inventory < 10:
+   product_under_10_inv[product_num] = inventory
+
+print (product_under_10_inv)
+
+
+inventory_price.value = inventory * price
+
+inv_file.save("inventory_with_total_value.xlsx")
+
+```
+
+
+
+
+
+
+
 
 
 
