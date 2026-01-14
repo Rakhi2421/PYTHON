@@ -899,6 +899,83 @@ inv_file.save("inventory_with_total_value.xlsx")
 
 ```
 
+# Classes and Objects
+
+Classes:
+- Classes is like an an object constructor
+- all classes have a __init__() function
+- __init__() is executed automatically, when we create objects from this class.
+
+"self" parameter
+- self is a reference to the current instance of the class
+- it is used to access variables that belong to the class.
+
+"Object"
+- object will be created with initial values
+  tom = User("tt@tt.com", "Tom", "pwd", "Developer")
+- call function on that object to change its password
+  tom.change_password("better_pwd")
+
+Methods:
+- Functions that belong to an object are called methods.
+
+Object Oriented Programming
+
+- Almost everything in a python is a object
+- str(), int() , .... are constructor functions
+- 
+
+```bash
+
+# Creating a class
+#user.py
+class User:
+    def __init__(self, user_email, name, password, current_job_title):
+        self.email = user_email
+        self.name = name
+        self.password = password
+        self.current_job_tile = current_job_title
+
+    def change_password(self, new_password):
+        self.password = new_password
+    def change_job_title(self, new_job_title):
+        self.current_job_title = new_job_title
+    def get_user_info(self):
+        print(f"User {self.name} currently working as a {self.current_job_title}. You can contact him through {self.email}")
+
+# Creating an Object
+
+# main.py
+
+from user import User
+app_user_one = User("nn@nn.com", "Rakesh", "pwd1", "DevOps Engineer")
+app_user_one.get_user_info()
+app_user_two = User("vv@vv.com", "Venkatesh", "pwd2", "Pharma Engineer")
+app_user_two.get_user_info()
+
+# Creating another class and objects
+
+# main.py
+
+from user import User
+from post import Post
+app_user_one = User("nn@nn.com", "Rakesh", "pwd1", "DevOps Engineer")
+app_user_one.get_user_info()
+app_user_two = User("vv@vv.com", "Venkatesh", "pwd2", "Pharma Engineer")
+app_user_two.get_user_info()
+
+new_post = Post("On a secret mission today"app_user_two.name)
+new_post.get_post_info()
+
+# post.py
+class Post:
+
+    def __init__(self, message, author):
+        self.message = message
+        self.author = author
+
+    def get_post_info(self):
+        print(f"Post: {self.message} written by {self.author}")
 
 
 
